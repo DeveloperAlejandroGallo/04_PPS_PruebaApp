@@ -1,0 +1,14 @@
+<ion-item>
+    <ion-label>Email: </ion-label>
+    <ion-input type="text" placeholder="Ingrese Email" [(ngModel)]="email"></ion-input>
+</ion-item>
+<ion-item>
+    <ion-label>Clave: </ion-label>
+    <ion-input type="password" placeholder="Ingrese Clave" [(ngModel)]="password"></ion-input>
+</ion-item>
+<ion-item-divider>
+    <ion-button (click)="validateEmailPassw()" shape="round" size="medium">
+        Ingresar
+    </ion-button>
+</ion-item-divider>
+<ion-label>{{mensaje}}</ion-label>
