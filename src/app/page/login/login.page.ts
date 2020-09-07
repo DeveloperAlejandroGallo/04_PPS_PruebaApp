@@ -11,8 +11,8 @@ import { AuthenticateService } from '../../service/authenticate.service';
 export class LoginPage implements OnInit
 {
   // Declaraciones
-  email: string;
-  password: string;
+  correo: string;
+  clave: string;
   mensaje: string;
 
   constructor(
@@ -22,14 +22,94 @@ export class LoginPage implements OnInit
 
   ngOnInit() {}
 
+  public register(): void {
+    this.createUserFireBase(this.correo, this.clave);
+  }
 
-  validateEmailPassw()
+  public validarCorreoClave(): void
   {
-    this.authServise.initSesion(this.email, this.password).then(resp =>
+    if (this.correoValido(this.correo))
     {
-        this.mensaje = 'Bienvenido';
+      if (this.clave !== '' && this.clave !== undefined)
+      {
+        this.authServise.logueoConEmailYClave(this.correo, this.clave).then(resp =>
+        {
+            this.mensaje = 'Bienvenido';
+        }).catch(error => {
+          console.log(error.code);
+          switch (error.code)
+          {
+            case 'auth/invalid-email':
+              this.mensaje = 'Correo con formato incorrecto';
+              break;
+            case 'auth/wrong-password':
+              this.mensaje = 'Clave incorrecta';
+              break;
+              default:
+                this.mensaje = error.message;
+          }
+        });
+      }
+      else
+      {
+        this.mensaje = 'Por favor ingrese una clave';
+      }
+    }
+    else
+    {
+      this.mensaje = 'Por favor ingrese un correo valido';
+    }
+  }
+
+
+  private createUserFireBase(email: string, password: string) {
+
+    this.authServise.register(email, password).then(res => {
+      console.log(res);
+
+      this.mensaje = 'Registro exitoso.';
+      this.router.navigate(['']);
+
     }).catch(error => {
-      this.mensaje = error.message;
+      console.log(error);
+      switch (error.code)
+      {
+        case 'auth/weak-password':
+          this.mensaje = 'La clave debe poseer al menos 6 caracteres';
+          break;
+        case 'auth/email-already-in-use':
+          this.mensaje = 'Correo ya registrado';
+          break;
+          case 'auth/invalid-email':
+            this.mensaje = 'Correo con formato invalido';
+            break;
+          default:
+            this.mensaje = 'Error en registro';
+      }
     });
+  }
+
+
+  correoValido(correo: string)
+  {
+    let ret = true;
+    if (correo !== '' && correo !== undefined)
+    {
+      if (!correo.includes('@'))
+      {
+        ret = false;
+      }
+    }
+    else
+    {
+      ret = false;
+    }
+
+    return ret;
+  }
+
+  save(event): any
+  {
+    this.validarCorreoClave();
   }
 }

@@ -8,8 +8,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthenticateService {
 
   constructor(private auth: AngularFireAuth) { }
-  initSesion(email: string, passw: string)
-  {
-    return this.auth.signInWithEmailAndPassword(email, passw);
+  
+  logueoConEmailYClave(email: string, password: string)   {
+    return this.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  register(email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password);
   }
 }
