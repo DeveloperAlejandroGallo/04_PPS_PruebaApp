@@ -5,7 +5,11 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) },
   { path: 'login', loadChildren: () => import('./page/login/login.module').then( m => m.LoginPageModule)},
   { path: 'bienvenido', loadChildren: () => import('./page/bienvenido/bienvenido.module').then( m => m.BienvenidoPageModule) },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },  {
+    path: 'splash',
+    loadChildren: () => import('./page/splash/splash.module').then( m => m.SplashPageModule)
+  },
+
 
 ];
 

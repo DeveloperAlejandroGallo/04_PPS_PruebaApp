@@ -1,8 +1,19 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title>
-            Login
-        </ion-title>
+        <ion-buttons slot="secondary">
+            <ion-button>
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+            <ion-button>
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button color="secondary">
+                <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{menu}}</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -11,7 +22,28 @@
             <ion-title size="large">Blank</ion-title>
         </ion-toolbar>
     </ion-header>
-    <div id="container">
+    <div id="container" class="container ion-text-center">
         <app-login></app-login>
     </div>
 </ion-content>
+<!-- <ion-toolbar>
+    <ion-buttons slot="secondary">
+        <ion-button>
+            <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+        </ion-button>
+        <ion-button>
+            <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+        <ion-button color="secondary">
+            <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+</ion-toolbar>
+<ion-content>
+    <div id="container">
+        <app-login></app-login>
+    </div>
+</ion-content> -->
