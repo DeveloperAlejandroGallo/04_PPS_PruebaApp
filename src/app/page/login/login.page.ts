@@ -35,6 +35,7 @@ export class LoginPage implements OnInit
         this.authServise.logueoConEmailYClave(this.correo, this.clave).then(resp =>
         {
             this.mensaje = 'Bienvenido';
+            this.router.navigate(['/bienvenido']);
         }).catch(error => {
           console.log(error.code);
           switch (error.code)
@@ -82,6 +83,9 @@ export class LoginPage implements OnInit
           break;
           case 'auth/invalid-email':
             this.mensaje = 'Correo con formato invalido';
+            break;
+          case 'auth/argument-error':
+            this.mensaje = 'Correo con debe ser una cadena v\u00E1lida';
             break;
           default:
             this.mensaje = 'Error en registro';
